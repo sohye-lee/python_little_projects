@@ -2,13 +2,16 @@ from turtle import Turtle, Screen
 import random
 
 screen = Screen()
-screen.screensize(500,400,bg="black")
+screen.setup(width=500, height=400)
 
 is_ready = False
-user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will win the race? Enther the color: ")
+user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will win the race? Enther the color \n(red, orange, yellow, green, blue, purple: ")
 colors = ["red","orange","yellow","green","blue","navy","purple"]
 y_positions = [-120, -80, -40, 0, 40, 80, 120]
 turtles = []
+
+if user_bet:
+    is_ready = True
 
 for index in range(0,7):
     t = Turtle(shape="turtle")
@@ -18,19 +21,18 @@ for index in range(0,7):
     t.goto(x=-230, y=y_positions[index])
     turtles.append(t)
 
-if user_bet:
-    is_ready = True
 
 while is_ready:
-
     for turtle in turtles:
-        if turtle.xcor() > 230:
-            winner = turtle.pencolor()
+        if turtle.xcor() > 210:
             is_ready = False
+            winner = turtle.pencolor()
             if winner == user_bet:
-                print(f"You've wont! the {winner} turtle in")
+                # screen.
+                print(f"You've won! the {winner} turtle in.")
             else:
                 print(f"You've lost the bet! The winner is {winner}!")
+
         distance = random.randint(0, 15)
         turtle.forward(distance)
 
